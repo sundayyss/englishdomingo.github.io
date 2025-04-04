@@ -1,1 +1,51 @@
-# englishdomingo.github.io
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Password Strength Checker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Password Strength Checker</h1>
+        <input type="password" id="password" placeholder="Enter your password">
+        <button onclick="checkPasswordStrength()">Check Strength</button>
+        <div id="result"></div>
+    </div>
+    <footer>
+        <p>Designed By Alvaro Domingo and Aleix Rovira</p>
+    </footer>
+    <script>
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const result = document.getElementById('result');
+            
+            let strength = 0;
+            if (password.length >= 8) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+            if (strength === 0) {
+                result.textContent = 'Very Weak';
+                result.style.color = 'red';
+            } else if (strength <= 2) {
+                result.textContent = 'Weak';
+                result.style.color = 'orange';
+            } else if (strength === 3) {
+                result.textContent = 'Moderate';
+                result.style.color = 'yellow';
+            } else if (strength === 4) {
+                result.textContent = 'Strong';
+                result.style.color = 'green';
+            } else {
+                result.textContent = 'Very Strong';
+                result.style.color = 'darkgreen';
+            }
+        }
+    </script>
+</body>
+</html>
